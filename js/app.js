@@ -21,7 +21,7 @@ var Enemy = function () {
     this.speed = getRandom(1.5, 5.0);
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
-    this.sprite = 'images/enemy-bug.png';//加载图片
+    this.sprite = 'images/enemy-bug.png';
 };
 
 // Update the enemy's position, required method for game
@@ -43,7 +43,7 @@ Enemy.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-// Now write your own player class创建player类，并添加方法
+// Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
 var Player = function () {
@@ -52,7 +52,7 @@ var Player = function () {
     this.y = singleHeight * 5 - singleHeight / 6;
     // The image/sprite for our player, this uses
     // a helper we've provided to easily load images
-    this.sprite = 'images/char-boy.png';//加载图片
+    this.sprite = 'images/char-boy.png';
 };
 //not need
 Player.prototype.update = function () {
@@ -96,15 +96,15 @@ Player.prototype.reset = function () {
 //Impact validation functions，in four cases
 Player.prototype.checkCollisions = function () {
     for (var i = 0; i < allEnemies.length; i++)
-        if (this.y > allEnemies[i].y - singleHeight + singleHeight / 6 && //人的下边界与虫子上边界碰撞
-            this.y < allEnemies[i].y + singleHeight - singleHeight / 6 && //人的上边界与虫子下边界碰撞
-            this.x > allEnemies[i].x - singleWidth &&  //人的右边界与虫子左边界碰撞
-            this.x < allEnemies[i].x + singleWidth - singleWidth / 4) {  //人的左边界与虫子右边界碰撞
+        if (this.y > allEnemies[i].y - singleHeight + singleHeight / 6 &&
+            this.y < allEnemies[i].y + singleHeight - singleHeight / 6 &&
+            this.x > allEnemies[i].x - singleWidth &&
+            this.x < allEnemies[i].x + singleWidth - singleWidth / 4) {
             this.reset();
             break;
         }
 };
-// Now instantiate your objects.创建 enemy和player实例
+// Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 var player = new Player();
