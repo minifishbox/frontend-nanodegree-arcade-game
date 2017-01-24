@@ -7,17 +7,17 @@ function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-//singleHeight means the table height ,singleWidth means the table width
-var singleHeight = 83,
-    singleWidth = 101;
+//SINGLE_HEIGHT means the table height ,SINGLE_WIDTH means the table width
+var SINGLE_HEIGHT = 83,
+    SINGLE_WIDTH = 101;
 
 // Enemies our player must avoid
 var Enemy = function () {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
-    this.x = -singleWidth;
-    //singleHeight / 4 this value in order to keep enemies in the Middle
-    this.y = singleHeight * getRandomInt(1, 3) - singleHeight / 4;
+    this.x = -SINGLE_WIDTH;
+    //SINGLE_HEIGHT / 4 this value in order to keep enemies in the Middle
+    this.y = SINGLE_HEIGHT * getRandomInt(1, 3) - SINGLE_HEIGHT / 4;
     this.speed = getRandom(1.5, 5.0);
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
@@ -31,9 +31,9 @@ Enemy.prototype.update = function (dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     this.x += this.speed * dt * 40;
-    if (this.x > singleWidth * 5) {
-        this.x = -singleWidth;
-        this.y = singleHeight * getRandomInt(1, 3) - singleHeight / 4;
+    if (this.x > SINGLE_WIDTH * 5) {
+        this.x = -SINGLE_WIDTH;
+        this.y = SINGLE_HEIGHT * getRandomInt(1, 3) - SINGLE_HEIGHT / 4;
     }
 
 };
@@ -47,9 +47,9 @@ Enemy.prototype.render = function () {
 // This class requires an update(), render() and
 // a handleInput() method.
 var Player = function () {
-    this.x = singleWidth * 2;
-    //singleHeight/6 this value in order to keep player in the Middle
-    this.y = singleHeight * 5 - singleHeight / 6;
+    this.x = SINGLE_WIDTH * 2;
+    //SINGLE_HEIGHT/6 this value in order to keep player in the Middle
+    this.y = SINGLE_HEIGHT * 5 - SINGLE_HEIGHT / 8;
     // The image/sprite for our player, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/char-boy.png';
@@ -67,39 +67,39 @@ Player.prototype.handleInput = function (key) {
     switch (key) {
         case "left":
             if (this.x > 0) {
-                this.x -= singleWidth;
+                this.x -= SINGLE_WIDTH;
             }
             break;
         case "right":
-            if (this.x < 4 * singleWidth) {
-                this.x += singleWidth;
+            if (this.x < 4 * SINGLE_WIDTH) {
+                this.x += SINGLE_WIDTH;
             }
             break;
         case "up":
             if (this.y > 0)
-                this.y -= singleHeight;
+                this.y -= SINGLE_HEIGHT;
             else {
                 this.reset();//When you reach the top of the River, player return to the starting position
             }
             break;
         case "down":
-            if (this.y < 5 * singleHeight) {
-                this.y += singleHeight;
+            if (this.y <4 * SINGLE_HEIGHT) {
+                this.y += SINGLE_HEIGHT;
             }
             break;
     }
 };
 Player.prototype.reset = function () {
-    this.x = singleWidth * 2;
-    this.y = singleHeight * 5 - singleHeight / 6;
+    this.x = SINGLE_WIDTH * 2;
+    this.y = SINGLE_HEIGHT * 5 - SINGLE_HEIGHT / 8;
 };
 //Impact validation functions，in four cases
 Player.prototype.checkCollisions = function () {
     for (var i = 0; i < allEnemies.length; i++)
-        if (this.y > allEnemies[i].y - singleHeight + singleHeight / 6 &&
-            this.y < allEnemies[i].y + singleHeight - singleHeight / 6 &&
-            this.x > allEnemies[i].x - singleWidth &&
-            this.x < allEnemies[i].x + singleWidth - singleWidth / 4) {
+        if (this.y > allEnemies[i].y - SINGLE_HEIGHT + SINGLE_HEIGHT / 6 &&
+            this.y < allEnemies[i].y + SINGLE_HEIGHT - SINGLE_HEIGHT / 6 &&
+            this.x > allEnemies[i].x - SINGLE_WIDTH &&
+            this.x < allEnemies[i].x + SINGLE_WIDTH - SINGLE_WIDTH / 4) {
             this.reset();
             break;
         }
